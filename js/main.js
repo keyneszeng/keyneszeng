@@ -53,6 +53,13 @@ const aiProjects = [
     desc: '基于NLP的病历脱敏工具，支持中文PII识别（身份证、电话、姓名等），纯规则引擎实现，USB即插即用部署。',
     tools: ['Python', 'FastAPI', 'NLP'],
     video: 'videos/demo-video.mov'
+  },
+  {
+    icon: '🩺',
+    title: '执医24项AI临床技能评估系统',
+    desc: '执业医师资格考试24项临床技能的AI评估框架，以CPR为MVP验证，实现零专用硬件的客观评分系统，具备AutoSkill→SelfTrain→ABTest自我进化能力。',
+    tools: ['Python', 'MediaPipe', 'AI'],
+    link: '/post.html?id=zhixi-24-ai-clinical-skills'
   }
 ];
 
@@ -69,6 +76,7 @@ if (projectsContainer) {
         ${p.tools.map(t => `<span class="ai-project-tool">${t}</span>`).join('')}
       </div>
       ${p.video ? '<button class="ai-video-btn">▶ 观看演示视频</button>' : ''}
+      ${p.link ? '<a href="' + p.link + '" class="ai-project-link">📖 查看详情 →</a>' : ''}
     </div>
   `).join('');
 }

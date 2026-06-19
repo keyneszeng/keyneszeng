@@ -684,6 +684,27 @@ img { max-width: 100%; height: auto; }
   background: var(--accent);
   color: #fff;
 }
+.ai-project-link {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-alt);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: all var(--transition);
+  align-self: flex-start;
+}
+.ai-project-link:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
 
 /* ===== 视频弹窗 ===== */
 .video-modal {
