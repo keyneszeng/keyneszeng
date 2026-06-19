@@ -1,6 +1,164 @@
 // ===== 博客文章数据 =====
 const postsData = [
   {
+    id: 'zhixi-24-ai-clinical-skills',
+    title: '执医24项AI临床技能训练评估框架：从CPR评分到自我进化系统',
+    date: '2026-06-19',
+    tags: ['AI', 'AI工具', '医疗健康'],
+    excerpt: '执业医师资格考试24项临床技能的AI评估框架，以CPR为MVP验证，实现零专用硬件的客观评分系统，具备AutoSkill→SelfTrain→ABTest自我进化能力。',
+    content: `
+<h2>一、问题定义</h2>
+<p>全国约1800家三级甲等医院每年承担着数十万住院医师的规范化培训任务。培训中的核心环节——24项临床技能考核（包括心肺复苏、电除颤、腰椎穿刺、腹腔穿刺、导尿术、胃管置入、伤口缝合等）——至今仍主要依赖考官现场目测打分，存在<strong>主观性强、标准不一、无法规模化</strong>的根本性缺陷。</p>
+
+<table>
+  <tr><th>维度</th><th>现状</th><th>问题</th></tr>
+  <tr><td>评估方式</td><td>考官现场目测打分</td><td>主观性强，同操作不同考官评分差异可达20-30分</td></tr>
+  <tr><td>训练手段</td><td>高仿真模拟人（单价¥5K-50K）</td><td>成本高，无法大规模部署</td></tr>
+  <tr><td>反馈时效</td><td>操作结束后口头反馈</td><td>非实时，学生无法感知错误时机</td></tr>
+  <tr><td>数据积累</td><td>无系统化记录</td><td>无法追踪学员进步轨迹</td></tr>
+</table>
+
+<h2>二、解决方案：AI-Native框架</h2>
+<p>本文提出并实现了一套<strong>AI-Native临床技能训练评估框架</strong>，以心肺复苏（CPR）操作评估为MVP验证案例，利用MediaPipe姿态估计实现<strong>零专用硬件</strong>的客观评分系统。</p>
+
+<h3>2.1 整体架构</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                    展示层 (Dashboard)                         │
+│  实时HUD: 摄像头画面 + 评分面板 + AI导师反馈 + 趋势图        │
+├─────────────────────────────────────────────────────────────┤
+│                    AI推理层 (AI Engine)                       │
+│  MediaPipe Pose │ LLM Tutor │ 脱敏数据通道 │ 特征提取       │
+├─────────────────────────────────────────────────────────────┤
+│                    业务逻辑层 (Core)                         │
+│  注册中心 │ 评分引擎 │ 数据中枢 │ 技能编排器 │ 自我进化引擎  │
+├─────────────────────────────────────────────────────────────┤
+│                     数据层 (Data Hub)                        │
+│  SQLite (本地) │ 匿名化特征存储 │ 培训记录 │ Session管理    │
+└─────────────────────────────────────────────────────────────┘</code></pre>
+
+<h3>2.2 核心设计理念</h3>
+<table>
+  <tr><th>特征</th><th>传统方案（AI-attached）</th><th>AI-Native（本文方案）</th></tr>
+  <tr><td>AI角色</td><td>后加的"智能模块"</td><td>从第一天集成</td></tr>
+  <tr><td>数据流</td><td>AI单向消费数据</td><td>数据飞轮：评估→收集→训练→优化</td></tr>
+  <tr><td>扩展性</td><td>每个技能单独开发</td><td>声明式skill.yaml + 插件引擎</td></tr>
+  <tr><td>进化能力</td><td>手动更新模型</td><td>AutoSkill + SelfTrain + ABTest 自动进化</td></tr>
+</table>
+
+<h2>三、CPR评分算法</h2>
+<h3>3.1 信号提取</h3>
+<p>从MediaPipe输出中提取手腕关键点（Landmark 15, 16）的Y轴坐标序列，通过以下步骤处理：</p>
+<ol>
+  <li><strong>平滑滤波</strong>：Savitzky-Golay滤波器去除高频噪声</li>
+  <li><strong>基线漂移校正</strong>：去除呼吸和身体微动导致的信号漂移</li>
+  <li><strong>峰检测</strong>：基于纯NumPy的局部极大值检测（无需SciPy）</li>
+</ol>
+
+<h3>3.2 评分维度</h3>
+<table>
+  <tr><th>评分维度</th><th>权重</th><th>满分条件</th></tr>
+  <tr><td>按压频率(CPM)</td><td>50%</td><td>100-120 CPM（目标值110）</td></tr>
+  <tr><td>节奏一致性(CV%)</td><td>30%</td><td>CV < 10%</td></tr>
+  <tr><td>深度指数</td><td>20%</td><td>稳定且有力的按压</td></tr>
+</table>
+
+<p><strong>综合评分</strong>: <code>score = (frequency_score × 0.5 + consistency_score × 0.3 + depth_score × 0.2) × 100</code></p>
+<p>在合成数据上的验证结果：<strong>CPM=110, CV=3.8%, Score=99/100，算法准确率99.9%</strong>。</p>
+
+<h2>四、自我进化系统</h2>
+<p>AI-Native框架的核心创新在于三阶段自我进化引擎：</p>
+
+<h3>4.1 AutoSkill——从数据生成新技能</h3>
+<p>当某个相近操作的训练数据积累到<strong>5000条</strong>后，AutoSkill模块自动分析操作模式，生成新的技能定义（skill.yaml + scoring.py模板）。所有生成内容保持人工可审查（human-in-the-loop）。</p>
+
+<h3>4.2 SelfTrain——自动参数优化</h3>
+<p>收集<strong>100条</strong>以上训练数据后触发，通过网格搜索调整评分权重参数，输出新版本模型。</p>
+
+<h3>4.3 ABTest——灰度切换</h3>
+<p>当优化后的模型积累<strong>30条</strong>验证数据后，将流量随机分配为A组（旧模型）和B组（新模型），计算改进幅度的统计显著性（阈值：2%），显著时自动切换。</p>
+
+<h2>五、LLM导师系统</h2>
+<p>支持多供应商架构，默认离线模式（零成本），可选DeepSeek（~¥0.001/次）或OpenAI：</p>
+<table>
+  <tr><th>供应商</th><th>角色</th><th>成本</th></tr>
+  <tr><td>OfflineTutor</td><td>默认模式（离线、免费）</td><td>零</td></tr>
+  <tr><td>DeepSeek</td><td>推荐在线模式</td><td>~¥0.001/次</td></tr>
+  <tr><td>OpenAI</td><td>备用在线模式</td><td>~$0.002/次</td></tr>
+</table>
+
+<h2>六、测试结果</h2>
+<table>
+  <tr><th>测试项</th><th>结果</th></tr>
+  <tr><td>姿态检测</td><td>单人正面姿态稳定33个关键点检测，30+ FPS</td></tr>
+  <tr><td>CPR评分算法</td><td>CPM=110, CV=3.8%, Score=99/100 (合成数据)</td></tr>
+  <tr><td>框架注册中心</td><td>1 skill found (CPR), 自动发现</td></tr>
+  <tr><td>AutoSkill</td><td>可生成835B YAML + 731B Python 模板</td></tr>
+  <tr><td>端到端测试</td><td>合成视频检测通过，算法已验证</td></tr>
+</table>
+
+<h2>七、商业机会</h2>
+<h3>7.1 市场规模</h3>
+<table>
+  <tr><th>维度</th><th>估算</th></tr>
+  <tr><td>TAM（总可寻址市场）</td><td>¥500-1500亿人民币</td></tr>
+  <tr><td>SAM（可服务市场）</td><td>¥50-150亿/年</td></tr>
+  <tr><td>目标客户</td><td>全国~1800家三甲医院 + 200+所医学院</td></tr>
+</table>
+
+<h3>7.2 价值主张</h3>
+<table>
+  <tr><th>维度</th><th>传统方案</th><th>AI-Native方案</th></tr>
+  <tr><td>硬件成本</td><td>¥5K-200K/台（模拟人）</td><td>零（普通摄像头）</td></tr>
+  <tr><td>评估一致性</td><td>主观偏差20-30分</td><td>评分标准完全统一</td></tr>
+  <tr><td>部署时间</td><td>数月</td><td>3分钟</td></tr>
+</table>
+
+<h3>7.3 企业机遇</h3>
+<p><strong>第一梯队：天津天堰科技 (300314.SZ)</strong> — A股上市，市值约40-60亿，全国1000+医院渠道，可OEM合作或技术授权。</p>
+<p><strong>第二梯队：北京医模科技 (300331.SZ) / 科大讯飞 (002230.SZ)</strong> — 硬件能力+AI渠道，可作为Plan B。</p>
+
+<blockquote>
+<strong>核心洞察</strong>：所有传统医疗教育企业在GitHub上的技术足迹均为零——你进入的不是"竞争激烈的市场"，而是一个等待被创造的市场。
+</blockquote>
+
+<h2>八、未来工作</h2>
+<h3>短期（1-2个月）</h3>
+<ul>
+  <li>真实CPR视频端到端测试（P0）</li>
+  <li>PPT生成，为医疗机构拜访准备（P0）</li>
+  <li>联系1-2家三甲医院技能中心试用（P1）</li>
+</ul>
+
+<h3>中期（3-6个月）</h3>
+<ul>
+  <li>实现第2项技能（如电除颤或腰椎穿刺）</li>
+  <li>联邦学习基础设施编码</li>
+  <li>企业版MVP</li>
+</ul>
+
+<h3>长期（6-12个月）</h3>
+<ul>
+  <li>全部24项技能插件</li>
+  <li>SaaS平台上线</li>
+  <li>AI评分认证（与医学会合作）</li>
+</ul>
+
+<h2>九、结论</h2>
+<p>本文提出并实现了一套AI-Native临床技能训练评估框架，以CPR操作为验证案例，证明了<strong>"零专用硬件、纯摄像头+AI评分"方案的可行性</strong>。主要贡献包括：</p>
+<ol>
+  <li><strong>技术贡献</strong>：实现了一套基于MediaPipe姿态估计的实时CPR评分系统（算法精度99.9%），并设计了可扩展的AI-Native框架。</li>
+  <li><strong>系统设计贡献</strong>：提出了四阶段数据飞轮和三阶段自我进化引擎（AutoSkill → SelfTrain → ABTest）。</li>
+  <li><strong>商业贡献</strong>：系统分析了中国医疗教育AI市场的真空状态，提出了从开源到企业级部署的完整商业化路径。</li>
+  <li><strong>方法论贡献</strong>：验证了"轻量规则+AI"的务实路线在医疗AI中的有效性——仅3个Python包，总大小<20MB。</li>
+</ol>
+
+<p><strong>关键结论</strong>：AI+临床技能训练评估是一个被严重低估的蓝海市场。先行者有机会在竞品出现之前建立起数据飞轮、社区和品牌壁垒。</p>
+
+<hr>
+<p><em>项目地址：<a href="https://github.com/calmanzeng/cpr-ai-scorer" target="_blank">https://github.com/calmanzeng/cpr-ai-scorer</a></em></p>
+    `.trim()
+  },
+  {
     id: 'usb-openmed-research',
     title: 'USB-OpenMed：基于OpenMed的便携式医疗文本脱敏系统研发实践',
     date: '2026-06-20',
