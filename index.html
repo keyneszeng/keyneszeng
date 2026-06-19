@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keynes Zeng | 个人博客</title>
+    <meta name="description" content="Keynes Zeng的个人博客，分享医疗健康、运营管理与创业思考">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="/" class="logo">📋 Keynes Zeng</a>
+            <nav class="nav">
+                <a href="/" class="nav-link active">首页</a>
+                <a href="/blog.html" class="nav-link">文章</a>
+                <a href="/about.html" class="nav-link">关于</a>
+            </nav>
+            <button id="themeToggle" class="theme-toggle" aria-label="切换主题">
+                <span class="icon-sun">☀️</span>
+                <span class="icon-moon">🌙</span>
+            </button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="/" class="nav-link active">首页</a>
+            <a href="/blog.html" class="nav-link">文章</a>
+            <a href="/about.html" class="nav-link">关于</a>
+        </nav>
+    </header>
+
+    <!-- Hero 区域 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">你好，我是Keynes Zeng 👋</h1>
+                <p class="hero-subtitle">互联网医疗 · 运营管理 · 居家康复专家</p>
+                <p class="hero-desc">15年行业经验 | 多次创业经历 | 主导多款医疗SaaS产品从0到1落地</p>
+                <div class="hero-actions">
+                    <a href="/blog.html" class="btn btn-primary">阅读文章</a>
+                    <a href="/about.html" class="btn btn-outline">了解更多</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-code-block">
+                    <pre><code><span class="code-comment">// career-summary.js</span>
+<span class="code-keyword">const</span> name = <span class="code-string">"Keynes Zeng"</span>;
+<span class="code-keyword">const</span> experience = [
+  <span class="code-string">"运营总监 · 院外随访"</span>,
+  <span class="code-string">"副总裁 · 南丁护理"</span>,
+  <span class="code-string">"CEO · 月照科技"</span>,
+  <span class="code-string">"市场总监 · 欧凸欧"</span>
+];
+<span class="code-keyword">const</span> industry = <span class="code-string">"互联网医疗 + 居家康复"</span>;
+<span class="code-keyword">const</span> projects = [<span class="code-string">"骨科术后康复"</span>, <span class="code-string">"社区医疗SaaS"</span>, <span class="code-string">"在线医生APP"</span>];
+<span class="code-keyword">function</span> <span class="code-fn">summary</span>() {
+  <span class="code-keyword">return</span> {
+    title: <span class="code-string">`拥有 ${experience.length} 段核心经历`</span>,
+    focus: <span class="code-string">`深耕 ${industry}`</span>,
+    goal: <span class="code-string">"用科技让医疗更有温度"</span>
+  };
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最新文章 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">最新文章</h2>
+                <a href="/blog.html" class="section-more">查看全部 →</a>
+            </div>
+            <div class="posts-grid" id="latestPosts">
+                <!-- 由 JS 动态渲染 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 我的AI项目之旅 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">我的AI项目之旅</h2>
+                <a href="/blog.html?tag=AI" class="section-more">查看全部 →</a>
+            </div>
+            <div class="ai-projects" id="aiProjects">
+                <!-- 由JS动态渲染 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频播放弹窗 -->
+    <div id="videoModal" class="video-modal" aria-hidden="true">
+      <div class="video-modal-content">
+        <button class="video-modal-close" aria-label="关闭">×</button>
+        <video id="modalVideo" controls playsinline preload="metadata">
+          <source src="" type="video/quicktime">
+          <source src="" type="video/mp4">
+          您的浏览器不支持 HTML5 视频播放。
+        </video>
+      </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-info">
+                <p>© <span id="year"></span> Keynes Zeng的个人博客</p>
+                <p>用 ❤️ 和 ☕ 打造</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+                <a href="mailto:hello@example.com">邮件</a>
+                <a href="#">RSS</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/posts.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
