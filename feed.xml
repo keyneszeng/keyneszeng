@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>医疗AI工坊</title>
+  <link>https://keyneszeng.github.io/keyneszeng/</link>
+  <description>医疗AI工具研发 · 互联网医疗 · 创业者</description>
+  <language>zh-CN</language>
+  <lastBuildDate>Fri, 19 Jun 2026 16:50:31 GMT+8</lastBuildDate>
+  <atom:link href="https://keyneszeng.github.io/keyneszeng/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+    <title>执医24项AI临床技能训练评估框架：从CPR评分到自我进化系统</title>
+    <link>https://keyneszeng.github.io/keyneszeng/post.html?id=zhixi-24-ai-clinical-skills</link>
+    <description>执医24项AI临床技能训练评估框架：从CPR评分到自我进化系统 - 医疗AI工坊</description>
+    <pubDate>Fri, 19 Jun 2026 16:50:31 GMT+8</pubDate>
+    <guid>https://keyneszeng.github.io/keyneszeng/post.html?id=zhixi-24-ai-clinical-skills</guid>
+  </item>
+  <item>
+    <title>USB-OpenMed：基于OpenMed的便携式医疗文本脱敏系统研发实践</title>
+    <link>https://keyneszeng.github.io/keyneszeng/post.html?id=usb-openmed-research</link>
+    <description>USB-OpenMed：基于OpenMed的便携式医疗文本脱敏系统研发实践 - 医疗AI工坊</description>
+    <pubDate>Fri, 19 Jun 2026 16:50:31 GMT+8</pubDate>
+    <guid>https://keyneszeng.github.io/keyneszeng/post.html?id=usb-openmed-research</guid>
+  </item>
+  <item>
+    <title>互联网医疗的下一个十年：从流量到服务</title>
+    <link>https://keyneszeng.github.io/keyneszeng/post.html?id=internet-healthcare-future</link>
+    <description>互联网医疗的下一个十年：从流量到服务 - 医疗AI工坊</description>
+    <pubDate>Fri, 19 Jun 2026 16:50:31 GMT+8</pubDate>
+    <guid>https://keyneszeng.github.io/keyneszeng/post.html?id=internet-healthcare-future</guid>
+  </item>
+  <item>
+    <title>医疗创业六年：我踩过的五个大坑</title>
+    <link>https://keyneszeng.github.io/keyneszeng/post.html?id=startup-lessons-healthcare</link>
+    <description>医疗创业六年：我踩过的五个大坑 - 医疗AI工坊</description>
+    <pubDate>Fri, 19 Jun 2026 16:50:31 GMT+8</pubDate>
+    <guid>https://keyneszeng.github.io/keyneszeng/post.html?id=startup-lessons-healthcare</guid>
+  </item>
+  <item>
+    <title>骨科术后居家康复的实践与思考</title>
+    <link>https://keyneszeng.github.io/keyneszeng/post.html?id=home-rehabilitation-practice</link>
+    <description>骨科术后居家康复的实践与思考 - 医疗AI工坊</description>
+    <pubDate>Fri, 19 Jun 2026 16:50:31 GMT+8</pubDate>
+    <guid>https://keyneszeng.github.io/keyneszeng/post.html?id=home-rehabilitation-practice</guid>
+  </item>
+  <item>
+    <title>新品牌从0到1：南丁护理站的品牌实践</title>
+    <link>https://keyneszeng.github.io/keyneszeng/post.html?id=brand-building-operations</link>
+    <description>新品牌从0到1：南丁护理站的品牌实践 - 医疗AI工坊</description>
+    <pubDate>Fri, 19 Jun 2026 16:50:31 GMT+8</pubDate>
+    <guid>https://keyneszeng.github.io/keyneszeng/post.html?id=brand-building-operations</guid>
+  </item>
+  <item>
+    <title>华南大区业绩全国第一：B端市场开拓实战复盘</title>
+    <link>https://keyneszeng.github.io/keyneszeng/post.html?id=b2b-market-strategy</link>
+    <description>华南大区业绩全国第一：B端市场开拓实战复盘 - 医疗AI工坊</description>
+    <pubDate>Fri, 19 Jun 2026 16:50:31 GMT+8</pubDate>
+    <guid>https://keyneszeng.github.io/keyneszeng/post.html?id=b2b-market-strategy</guid>
+  </item>
+  <item>
+    <title>管理10人团队和100人团队，是完全不同的两种能力</title>
+    <link>https://keyneszeng.github.io/keyneszeng/post.html?id=team-management-lessons</link>
+    <description>管理10人团队和100人团队，是完全不同的两种能力 - 医疗AI工坊</description>
+    <pubDate>Fri, 19 Jun 2026 16:50:31 GMT+8</pubDate>
+    <guid>https://keyneszeng.github.io/keyneszeng/post.html?id=team-management-lessons</guid>
+  </item>
+</channel>
+</rss>

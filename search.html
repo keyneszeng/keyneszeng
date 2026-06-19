@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索 | 医疗AI工坊</title>
+    <meta name="description" content="搜索博客文章">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="/" class="logo">🧪 医疗AI工坊</a>
+            <nav class="nav">
+                <a href="/" class="nav-link">首页</a>
+                <a href="/blog.html" class="nav-link">文章</a>
+                <a href="/about.html" class="nav-link">关于</a>
+            </nav>
+            <button id="themeToggle" class="theme-toggle" aria-label="切换主题">
+                <span class="icon-sun">☀️</span>
+                <span class="icon-moon">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>🔍 搜索</h1>
+            <div class="search-box-wrapper">
+                <input type="text" id="searchInput" placeholder="输入关键词搜索文章..." class="search-input" autofocus>
+                <button id="searchBtn" class="btn btn-primary">搜索</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div id="searchResults" class="search-results"></div>
+            <div id="searchStats" class="search-stats"></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-info">
+                <p>© <span id="year"></span> 🧪 医疗AI工坊</p>
+                <p>用 ❤️ 和 ☕ 打造</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/keyneszeng" target="_blank" rel="noopener">GitHub</a>
+                <a href="mailto:keyneszeng@gmail.com">邮件</a>
+                <a href="/feed.xml">RSS</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/posts.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
