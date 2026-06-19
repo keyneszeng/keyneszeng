@@ -19,12 +19,12 @@ function renderPost() {
         <a href="/blog.html" class="btn btn-primary" style="margin-top:20px;">返回文章列表</a>
       </div>
     `;
-    document.title = '文章未找到 | Keynes Zeng 博客';
+    document.title = '文章未找到 | 医疗AI工坊';
     return;
   }
   
   // 设置页面标题和Meta标签（GEO优化）
-  document.title = post.title + ' | Keynes Zeng 博客';
+  document.title = post.title + ' | 医疗AI工坊';
   document.getElementById('pageDescription').textContent = post.excerpt;
   document.getElementById('pageKeywords').textContent = post.tags.join(', ');
   document.getElementById('ogUrl').textContent = window.location.href;
