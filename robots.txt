@@ -7,7 +7,7 @@ Allow: /
 # Sitemap location
 Sitemap: https://keyneszeng.github.io/keyneszeng/sitemap.xml
 
-# Allow all major AI crawlers
+# ===== 国外 AI 爬虫 =====
 User-agent: GPTBot
 Allow: /
 
@@ -17,6 +17,9 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
+User-agent: Google-Extended
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 
@@ -24,4 +27,44 @@ User-agent: PerplexityBot
 Allow: /
 
 User-agent: ClaudeBot
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+# ===== 国内 AI 爬虫 =====
+# 豆包 / 字节跳动 AI
+User-agent: Bytespider
+Allow: /
+
+# DeepSeek / 深度求索
+User-agent: DeepSeek-Crawler
+Allow: /
+
+# GLM / 智谱 AI（ChatGLM）
+User-agent: ZhipuBot
+Allow: /
+
+# 通义千问 / 阿里云 AI
+User-agent: QwenBot
+Allow: /
+
+# Kimi / 月之暗面
+User-agent: Moonshot-Crawler
+Allow: /
+
+# MiniMax / 海螺 AI
+User-agent: MiniMaxBot
+Allow: /
+
+# 百度文心一言
+User-agent: Baiduspider
+Allow: /
+
+# 360 智脑
+User-agent: 360Spider
+Allow: /
+
+# 华为盘古
+User-agent: Huawei-Crawler
 Allow: /
