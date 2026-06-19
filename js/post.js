@@ -8,10 +8,10 @@ function getPostId() {
 function renderPost() {
   const container = document.getElementById('postContent');
   if (!container) return;
-
+  
   const id = getPostId();
   const post = postsData.find(p => p.id === id);
-
+  
   if (!post) {
     container.innerHTML = `
       <div class="empty-state" style="text-align:center;padding:60px 0;">
@@ -19,12 +19,39 @@ function renderPost() {
         <a href="/blog.html" class="btn btn-primary" style="margin-top:20px;">返回文章列表</a>
       </div>
     `;
-    document.title = '文章未找到 | 清晨的博客';
+    document.title = '文章未找到 | Keynes Zeng 博客';
     return;
   }
-
-  document.title = `${post.title} | 清晨的博客`;
-
+  
+  // 设置页面标题和Meta标签（GEO优化）
+  document.title = post.title + ' | Keynes Zeng 博客';
+  document.getElementById('pageDescription').textContent = post.excerpt;
+  document.getElementById('pageKeywords').textContent = post.tags.join(', ');
+  document.getElementById('ogUrl').textContent = window.location.href;
+  document.getElementById('ogTitle').textContent = post.title;
+  document.getElementById('ogDescription').textContent = post.excerpt;
+  document.getElementById('twitterUrl').textContent = window.location.href;
+  document.getElementById('twitterTitle').textContent = post.title;
+  document.getElementById('twitterDescription').textContent = post.excerpt;
+  
+  // 设置 Schema.org 结构化数据（GEO优化）
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": post.title,
+    "description": post.excerpt,
+    "author": {
+      "@type": "Person",
+      "name": "Keynes Zeng",
+      "url": "https://keyneszeng.github.io/keyneszeng/about.html"
+    },
+    "datePublished": post.date,
+    "inLanguage": "zh-CN",
+    "keywords": post.tags.join(', '),
+    "mainEntityOfPage": window.location.href
+  };
+  document.getElementById('schemaJson').textContent = JSON.stringify(schemaData, null, 2);
+  
   const tagsHTML = post.tags.map(t => `<span class="post-tag">${t}</span>`).join('');
 
   container.innerHTML = `

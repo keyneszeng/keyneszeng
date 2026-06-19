@@ -1,0 +1,27 @@
+# robots.txt for Keynes Zeng Personal Blog
+# https://keyneszeng.github.io/keyneszeng/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://keyneszeng.github.io/keyneszeng/sitemap.xml
+
+# Allow all major AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /

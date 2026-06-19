@@ -119,6 +119,7 @@ const postsData = [
 
 <h2>八、正在进行的研发</h2>
 <p><strong>正联合多个医疗AI研究者共同研发其余执医23项AI算法</strong>，包括电除颤、腰椎穿刺、腹腔穿刺、导尿术、胃管置入、伤口缝合等核心临床技能。框架已支持声明式技能定义（skill.yaml + scoring.py），社区贡献者可快速接入新技能插件。</p>
+<p>相关项目：<a href="/post.html?id=usb-openmed-research">USB-OpenMed：基于OpenMed的便携式医疗文本脱敏系统</a> — 同样基于OpenMed开源框架，实现纯规则引擎的医疗数据脱敏。</p>
 
 <h2>九、结论</h2>
 <p>本文提出并实现了一套AI-Native临床技能训练评估框架，以CPR操作为验证案例，证明了<strong>"零专用硬件、纯摄像头+AI评分"方案的可行性</strong>。主要贡献包括：</p>
@@ -258,6 +259,7 @@ const BLACKLIST = ["程度一", "白蛋白", "第一", "第二", "类型一"];</
   <li><strong>Web端OCR</strong>：利用浏览器内置的Tesseract.js，实现纯前端OCR</li>
   <li><strong>性能优化</strong>：引入并行处理和多线程，提升批量处理吞吐量</li>
 </ol>
+<p>相关项目：<a href="/post.html?id=zhixi-24-ai-clinical-skills">执医24项AI临床技能训练评估框架</a> — 基于MediaPipe姿态估计的AI临床技能评估系统，同样基于OpenMed开源框架。</p>
 
 <p><em>项目地址：基于OpenMed v1.5.5（Apache-2.0）定制开发，以USB便携形式交付医院使用。</em></p>
     `.trim()
