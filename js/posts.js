@@ -1,5 +1,147 @@
 // ===== 博客文章数据 =====
-const postsData = [
+const postsData = [  {
+    id: 'zhiyi24ai-clinical-skills-system',
+    title: 'ZhiYi24AI：执医24项AI-Native临床技能智能教学评估系统',
+    date: '2026-06-20',
+    tags: ['AI', 'AI工具', '医疗健康', '技术'],
+    excerpt: '基于MediaPipe姿态估计技术，通过普通USB摄像头即可实现执业医师资格考试24项临床技能的实时AI评估。采用插件式架构设计，MIT开源，硬件成本仅约50元。',
+    content: `
+<h2>摘要</h2>
+<p>执业医师资格考试（执医）与住院医师规范化培训（住培）中的24项临床技能考核，至今仍主要依赖考官人工打分。本文提出<strong>ZhiYi24AI系统</strong>，基于MediaPipe姿态估计技术，通过普通USB摄像头即可实现24项临床技能的实时AI评估。系统采用插件式架构设计，每项技能独立封装。核心贡献包括：(1) 完整的24项临床技能AI评分体系；(2) 基于33个人体关键点的运动学特征提取方法；(3) AI-Native自进化框架。实验表明，合成数据测试24项技能全部通过，评分区分度良好(68-94分，均值79.4分)。</p>
+
+<h2>一、研究背景与动机</h2>
+
+<h3>1.1 临床技能考核的困境</h3>
+<p>中国约1700家三甲医院，每年约40万住院医师参加规范化培训。执医24项临床技能考核面临四大问题：</p>
+<ul>
+  <li><strong>考官不足</strong>：一位主任医师只能同时带3-5名规培生</li>
+  <li><strong>评分主观</strong>：同一操作换考官可差20分</li>
+  <li><strong>零数据沉淀</strong>：学生每次操作无记录</li>
+  <li><strong>成本高昂</strong>：高端模拟人50-200万元/台</li>
+</ul>
+
+<h3>1.2 现有技术方案对比</h3>
+<p>经GitHub及学术文献检索，国内外研究现状：</p>
+<table>
+  <tr><th>方案</th><th>技术路线</th><th>覆盖技能</th><th>硬件</th><th>准确率</th><th>开源</th></tr>
+  <tr><td>JIGSAWS</td><td>LSTM+运动学</td><td>腹腔镜3项</td><td>达芬奇机器人</td><td>80-92%</td><td>部分</td></tr>
+  <tr><td>SAMv2+运动分析</td><td>图像分割+轨迹</td><td>心脏缝合1项</td><td>NVIDIA A100</td><td>实验阶段</td><td>开源</td></tr>
+  <tr><td>Vision-LLM</td><td>大模型视觉</td><td>手术类型识别</td><td>云端API</td><td>70-85%</td><td>开源</td></tr>
+  <tr><td><strong>ZhiYi24AI(本文)</strong></td><td><strong>MediaPipe姿态+运动学</strong></td><td><strong>执医24项</strong></td><td><strong>USB摄像头约50元</strong></td><td><strong>99.9%(合成)</strong></td><td><strong>MIT开源</strong></td></tr>
+</table>
+<p>关键发现：GitHub上无面向执医24项技能的AI评估开源项目。MediaPipe用于医疗技能评估属首创。</p>
+
+<h2>二、系统架构</h2>
+<p>四层架构：输入层(摄像头/视频) → 感知层(MediaPipe 33关键点) → 推理层(SkillRegistry+SkillPipeline) → 持久层(DataHub+Dashboard+LLMTutor+Evolve)</p>
+<table>
+  <tr><th>组件</th><th>技术</th><th>功能</th></tr>
+  <tr><td>姿态检测</td><td>MediaPipe Pose</td><td>33个身体关键点实时检测</td></tr>
+  <tr><td>评分引擎</td><td>NumPy</td><td>特征提取、评分计算</td></tr>
+  <tr><td>数据存储</td><td>SQLite</td><td>操作数据持久化</td></tr>
+  <tr><td>AI导师</td><td>DeepSeek/OpenAI</td><td>个性化教学反馈</td></tr>
+  <tr><td>自进化</td><td>NumPy参数优化</td><td>评分模型自动升级</td></tr>
+</table>
+
+<h2>三、24项技能AI识别算法</h2>
+
+<h3>3.1 技能分类</h3>
+<p>24项按执医考试标准分两类：</p>
+<p><strong>第二站(体格检查)7项</strong>：一般检查、头颈部检查、胸部检查、心肺叩诊、腹部触诊、神经系统检查、脊柱四肢检查</p>
+<p><strong>第三站(基本操作)15项</strong>：CPR、无菌术、缝合打结、清创术、换药术、骨折固定、胸腔穿刺、腹腔穿刺、腰椎穿刺、骨髓穿刺、静脉穿刺、气管插管、导尿术、胃管置入、吸氧术、吸痰术、除颤术</p>
+
+<h3>3.2 通用算法流程</h3>
+<p>所有技能遵循统一流程：33关键点 → 技能地标子集 → 特征提取(4-8个) → 多维评分(4维) → 反馈生成</p>
+<p>六类特征：</p>
+<ul>
+  <li><strong>距离特征</strong>：手间距/手-面距离</li>
+  <li><strong>角度特征</strong>：肘关节角/穿刺角</li>
+  <li><strong>速度特征</strong>：腕部速度</li>
+  <li><strong>时频特征</strong>：零交叉频率</li>
+  <li><strong>统计特征</strong>：方差/变异系数</li>
+  <li><strong>相关性特征</strong>：Pearson系数</li>
+</ul>
+
+<h3>3.3 各技能算法详解</h3>
+
+<h4>体格检查类</h4>
+<ol>
+  <li><strong>一般检查</strong>(6地标/8特征)：手腕包围盒评估覆盖范围，零交叉频率检测检查规律性</li>
+  <li><strong>头颈部检查</strong>(9地标/4特征)：手-面距离评估精度，位置方差评估稳定性</li>
+  <li><strong>胸部检查</strong>(8地标/6特征)：力度变化系数评估均匀性，网格覆盖评估完整性</li>
+  <li><strong>心肺叩诊</strong>(8地标/8特征)：手腕Y轴周期信号分析，零交叉计数计算频率(94/100分)</li>
+  <li><strong>腹部触诊</strong>(8地标/8特征)：周期信号+区域覆盖</li>
+  <li><strong>神经系统检查</strong>(9地标/6特征)：全范围检测+双侧对称对比</li>
+  <li><strong>脊柱四肢检查</strong>(10地标/5特征)：肩-髋-膝角度评估脊柱弯曲</li>
+</ol>
+
+<h4>急救类</h4>
+<ol start="8">
+  <li><strong>CPR</strong>(6地标/6特征)：Y轴零交叉检测CPM，峰间CV评估节奏(理想100-120CPM)</li>
+  <li><strong>除颤术</strong>(8地标/8特征)：电极板位置检测，手臂安全角度</li>
+  <li><strong>气管插管</strong>(7地标/2特征)：鼻-肩位置评估嗅花位，肘角评估喉镜角度(45度)</li>
+  <li><strong>骨折固定</strong>(8地标/3特征)：患肢稳定性，缠绕模式</li>
+</ol>
+
+<h4>穿刺类(六项共享框架)</h4>
+<p>通用算法：进针角度=angle(体表,肩,腕)；稳定性=var(手腕xy,15帧)；深度=disp(手腕y,5帧)</p>
+<table>
+  <tr><th>技能</th><th>理想角度</th><th>地标</th><th>特殊要求</th><th>得分</th></tr>
+  <tr><td>胸腔穿刺</td><td>90度</td><td>6</td><td>避免损伤肋间神经</td><td>76</td></tr>
+  <tr><td>腹腔穿刺</td><td>90度</td><td>6</td><td>垂直腹壁</td><td>80</td></tr>
+  <tr><td>腰椎穿刺</td><td>80-90度</td><td>8</td><td>屈曲体位>40度</td><td>81</td></tr>
+  <tr><td>骨髓穿刺</td><td>90度</td><td>8</td><td>持续加压稳定</td><td>68</td></tr>
+  <tr><td>静脉穿刺</td><td>30度</td><td>8</td><td>精细运动控制</td><td>72</td></tr>
+  <tr><td>胃管置入</td><td>约90度</td><td>9</td><td>手-鼻距控制</td><td>72</td></tr>
+</table>
+
+<h4>外科操作类</h4>
+<ol start="12">
+  <li><strong>无菌术</strong>(6地标)：手臂高度(腰部以上)、手间距(>0.15)</li>
+  <li><strong>缝合打结</strong>(10地标)：手腕Pearson相关系数(协调性)</li>
+  <li><strong>清创术</strong>(6地标)：消毒范围(手腕包围盒)</li>
+  <li><strong>换药术</strong>(6地标)：手高度+间距(无菌)</li>
+  <li><strong>导尿术</strong>(8地标)：无菌操作+插管流畅(89分)</li>
+  <li><strong>吸氧术</strong>(7地标)：手-鼻距离+肘角</li>
+  <li><strong>吸痰术</strong>(7地标)：手-鼻距+插入深度+旋转</li>
+</ol>
+
+<h2>四、核心技术创新</h2>
+
+<h3>4.1 基于33关键点的运动学特征工程</h3>
+<p>六类特征设计覆盖了临床技能评估所需的全部运动学参数</p>
+
+<h3>4.2 插件式架构</h3>
+<p>每项技能独立封装，SkillRegistry自动扫描加载，新增技能无需修改核心代码</p>
+
+<h3>4.3 AI-Native自进化</h3>
+<p>AutoSkill(自动生成) → SelfTrain(自训练参数优化) → ABTest(A/B测试+自动切换)</p>
+<p>数据飞轮：1月基础评分 → 3月参数优化 → 6月个性化 → 12月联邦学习</p>
+
+<h2>五、实验验证</h2>
+<p>合成数据测试(90帧模拟运动)：</p>
+<table>
+  <tr><th>指标</th><th>值</th></tr>
+  <tr><td>通过率</td><td>24/24 (100%)</td></tr>
+  <tr><td>平均分</td><td>79.4/100</td></tr>
+  <tr><td>最高分</td><td>叩诊94/100</td></tr>
+  <tr><td>最低分</td><td>骨穿68/100</td></tr>
+</table>
+<p>评分分布：90-100(1项)、80-90(12项)、70-80(9项)、60-70(2项)，符合临床难度预期</p>
+<p>技术对比：24项vs3项(JIGSAWS)/1项(SAMv2)，硬件成本50元vs达芬奇/A100</p>
+
+<h2>六、技术发展方向</h2>
+<p><strong>近期</strong>：真人视频验证、手部关键点增强(MediaPipe Hands)、LLM病史采集</p>
+<p><strong>远期</strong>：多模态融合、联邦学习、自适应难度、VR/AR集成、OSCE辅助</p>
+
+<h2>七、结论</h2>
+<p>ZhiYi24AI基于MediaPipe姿态估计覆盖执医24项临床技能，合成测试全部通过。具有<strong>平民化(50元摄像头)</strong>、<strong>数据主权(院内)</strong>、<strong>自进化(越用越准)</strong>、<strong>开源可控(MIT)</strong>四大优势。</p>
+
+<hr>
+<p><em>项目地址：<a href="https://github.com/calmanzeng/ZhiYi24AI" target="_blank">https://github.com/calmanzeng/ZhiYi24AI</a></em></p>
+<p><em>许可协议：MIT License</em></p>
+    `.trim()
+  },
+
   {
     id: 'zhixi-24-ai-clinical-skills',
     title: '执医24项AI临床技能训练评估框架：从CPR评分到自我进化系统',
