@@ -56,13 +56,6 @@ const aiProjects = [
     link: '/post.html?id=usb-openmed-research'
   },
   {
-    icon: '🩺',
-    title: '执医24项AI临床技能评估框架（CPR MVP）',
-    desc: '以CPR为MVP验证的AI评估框架，实现零专用硬件的客观评分系统。算法精度99.9%，支持声明式技能定义（skill.yaml + scoring.py），社区贡献者可快速接入新技能插件。',
-    tools: ['Python', 'MediaPipe', 'AI'],
-    link: '/post.html?id=zhixi-24-ai-clinical-skills'
-  },
-  {
     icon: '🤖',
     title: 'Hermes Agent AI助手',
     desc: '基于大语言模型的智能代理系统，支持工具调用、多轮对话、任务编排。应用于自动化工作流和智能客服场景。',
