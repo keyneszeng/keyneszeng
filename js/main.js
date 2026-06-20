@@ -39,27 +39,34 @@ if (latestContainer) {
   latestContainer.innerHTML = latest.map(renderPostCard).join('');
 }
 
-// 首页：渲染AI项目之旅
+// 首页：渲染我的医疗AI工具
 const aiProjects = [
+  {
+    icon: '🧠',
+    title: 'ZhiYi24AI：执医24项AI临床技能评估系统',
+    desc: '基于MediaPipe姿态估计技术，通过普通USB摄像头即可实现执业医师资格考试24项临床技能的实时AI评估。MIT开源，硬件成本仅约50元。具备AutoSkill→SelfTrain→ABTest自进化能力。',
+    tools: ['Python', 'MediaPipe', 'NumPy', 'AI'],
+    link: '/post.html?id=zhiyi24ai-clinical-skills-system'
+  },
+  {
+    icon: '🏥',
+    title: 'USB-OpenMed：医疗文本脱敏系统',
+    desc: '基于OpenMed开源框架的USB即插即用型医疗脱敏工具。纯规则引擎实现，支持中文PII识别（身份证、电话、姓名、医保号等），无需GPU，医院内网可直接部署。',
+    tools: ['Python', 'FastAPI', 'Swift OCR'],
+    link: '/post.html?id=usb-openmed-research'
+  },
+  {
+    icon: '🩺',
+    title: '执医24项AI临床技能评估框架（CPR MVP）',
+    desc: '以CPR为MVP验证的AI评估框架，实现零专用硬件的客观评分系统。算法精度99.9%，支持声明式技能定义（skill.yaml + scoring.py），社区贡献者可快速接入新技能插件。',
+    tools: ['Python', 'MediaPipe', 'AI'],
+    link: '/post.html?id=zhixi-24-ai-clinical-skills'
+  },
   {
     icon: '🤖',
     title: 'Hermes Agent AI助手',
     desc: '基于大语言模型的智能代理系统，支持工具调用、多轮对话、任务编排。应用于自动化工作流和智能客服场景。',
     tools: ['Python', 'LLM', 'Tool-Use']
-  },
-  {
-    icon: '🏥',
-    title: '医疗文本脱敏系统',
-    desc: '基于NLP的病历脱敏工具，支持中文PII识别（身份证、电话、姓名等），纯规则引擎实现，USB即插即用部署。',
-    tools: ['Python', 'FastAPI', 'NLP'],
-    video: 'videos/demo-video.mov'
-  },
-  {
-    icon: '🩺',
-    title: '执医24项AI临床技能评估系统',
-    desc: '执业医师资格考试24项临床技能的AI评估框架，以CPR为MVP验证，实现零专用硬件的客观评分系统，具备AutoSkill→SelfTrain→ABTest自我进化能力。',
-    tools: ['Python', 'MediaPipe', 'AI'],
-    link: '/post.html?id=zhixi-24-ai-clinical-skills'
   }
 ];
 
